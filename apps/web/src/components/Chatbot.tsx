@@ -101,7 +101,7 @@ export default function Chatbot() {
   const [chatHistory, setChatHistory] = useState([
     {
       role: 'ai',
-      text: 'Namaste! 🙏 I am your **BakriWala AI Veterinary Assistant**.\n\nHow can I help your farm today? You can ask about:\n* **Vaccination schedules** (PPR, ET, Goat Pox)\n* **Low-cost feed formulas** & TMR\n* **Disease symptoms & remedies**\n* **High-yield goat breeds** & NABARD loans',
+      text: 'Namaste! 🙏 I am your **BakriWala AI Expert Assistant**.\n\nHow can I help your farm today? You can ask about:\n* **Vaccination schedules** (PPR, ET, Goat Pox)\n* **Low-cost feed formulas** & TMR\n* **Disease symptoms & remedies**\n* **High-yield goat breeds** & NABARD loans',
       time: 'Just now'
     }
   ]);
@@ -159,7 +159,7 @@ export default function Chatbot() {
           ...newHistory,
           {
             role: 'ai',
-            text: 'I had trouble fetching the answer. For urgent veterinary support, please **message our doctor team on WhatsApp at +91 63920 04098**.',
+            text: 'I had trouble fetching the answer. For urgent expert support, please **message our doctor team on WhatsApp at +91 63920 04098**.',
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
           }
         ]);
@@ -250,7 +250,7 @@ export default function Chatbot() {
                 <div className="flex items-center gap-2 text-[11px] text-green-300 font-medium">
                   <span>● Online</span>
                   <span>•</span>
-                  <span>Vet Diagnostics</span>
+                  <span>Expert Diagnostics</span>
                 </div>
               </div>
             </div>
@@ -259,13 +259,13 @@ export default function Chatbot() {
             <div className="flex items-center gap-1 text-slate-300">
               {/* WhatsApp Doctor Escalation */}
               <a
-                href="https://wa.me/+916392004098?text=Hello%20BakriWala%20Doctor,%20I%20need%20veterinary%20advice"
+                href="https://wa.me/+916392004098?text=Hello%20BakriWala%20Doctor,%20I%20need%20expert%20advice"
                 target="_blank"
                 rel="noreferrer"
-                title="Ask Vet Doctor on WhatsApp"
+                title="Ask Expert Doctor on WhatsApp"
                 className="p-1.5 hover:text-green-400 hover:bg-slate-800/80 rounded-lg transition text-xs font-bold flex items-center gap-1 bg-green-600/20 text-green-300 border border-green-500/30"
               >
-                <span>💬 Vet</span>
+                <span>💬 Expert</span>
               </a>
 
               {/* Clear Chat */}

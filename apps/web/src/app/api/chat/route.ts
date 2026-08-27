@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const systemPrompt = `You are GoatCare AI, an expert veterinary assistant and farming guide in India for BakriWala. Keep your answers concise, practical, encouraging, and highly accurate for goat farmers.`;
+    const systemPrompt = `You are GoatCare AI, an expert farming assistant and guide in India for BakriWala. Keep your answers concise, practical, encouraging, and highly accurate for goat farmers.`;
 
     const fullPrompt = `${systemPrompt}\nUser Question: ${message}`;
 

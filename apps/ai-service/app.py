@@ -39,9 +39,9 @@ def analyze():
         if not user_message:
             return jsonify({"success": False, "error": "No message provided"}), 400
 
-        # Give the AI a persona so it acts like a veterinary assistant
+        # Give the AI a persona so it acts like an expert assistant
         system_prompt = """
-        You are GoatCare AI, an expert veterinary assistant and farming guide in India.
+        You are GoatCare AI, an expert farming assistant and guide in India.
         Keep your answers concise, practical, and highly accurate.
         """
         

@@ -94,7 +94,7 @@ export default function PremiumContentPage() {
                 Premium Farm Management Hub
               </h1>
               <p className="text-slate-300 text-sm sm:text-base mt-2 max-w-2xl font-normal">
-                Download bankable NABARD project reports, calculate low-cost TMR formulas, and schedule 1-on-1 consultations with veterinary surgeons.
+                Download bankable NABARD project reports, calculate low-cost TMR formulas, and schedule 1-on-1 consultations with livestock experts.
               </p>
             </div>
 
@@ -147,7 +147,7 @@ export default function PremiumContentPage() {
                   VIP Membership Login Required
                 </h2>
                 <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                  This portal contains proprietary veterinary research, low-cost ration calculators, CAD shed blueprints, and bank-ready DPR project reports for commercial goat farmers.
+                  This portal contains proprietary expert research, low-cost ration calculators, CAD shed blueprints, and bank-ready DPR project reports for commercial goat farmers.
                 </p>
 
                 {/* Feature Previews (Locked) */}
@@ -155,7 +155,7 @@ export default function PremiumContentPage() {
                   {[
                     { title: 'NABARD 50+2 DPR Project Report', desc: 'Full CA-verified financial projection and subsidy claim file (.pdf / .docx)' },
                     { title: 'Interactive TMR Feed Formulation Tool', desc: 'Calculates cheapest 150-200g daily weight gain concentrate for your district' },
-                    { title: '1-on-1 Veterinary Surgeon Consultation', desc: 'Book direct 15-min emergency video calls with goat specialists' },
+                    { title: '1-on-1 Expert Consultation', desc: 'Book direct 15-min emergency video calls with goat specialists' },
                     { title: 'Certified Breeding Stock Directory', desc: 'Direct contacts of inspected, disease-free Barbari & Sirohi farms' }
                   ].map((feat, idx) => (
                     <div key={idx} className="p-4 bg-white rounded-xl border border-slate-200 shadow-xs flex items-start gap-3">
@@ -220,15 +220,22 @@ export default function PremiumContentPage() {
                         name: 'Farmer Starter',
                         priceNum: 1499,
                         priceStr: '₹1,499',
-                        period: '/ 6 Months',
-                        features: ['DPR Reports', 'Feed Calculator', 'Vet Support'],
+                        period: '/ 1 Month',
+                        features: ['30-Day Action Plan', 'Video Masterclasses', 'WhatsApp Support'],
                       })
                     }
                     type="button"
                     className="w-full py-3 bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-400 hover:to-amber-400 text-slate-950 font-black rounded-xl text-xs sm:text-sm transition shadow-md flex items-center justify-center gap-2"
                   >
-                    <span>💳 Unlock VIP Access with Razorpay (₹1,499)</span>
+                    <span>💳 Unlock Access with Razorpay (₹1,499)</span>
                   </button>
+
+                  <Link
+                    href="/payment"
+                    className="block w-full py-2.5 bg-green-700 hover:bg-green-800 text-white font-bold rounded-xl text-xs transition text-center shadow-xs"
+                  >
+                    <span>📱 Pay via Direct UPI QR Code / All Plans ➔</span>
+                  </Link>
 
                   <p className="text-[11px] text-slate-400 font-semibold">Testing or Exploring?</p>
                   <button
@@ -261,7 +268,7 @@ export default function PremiumContentPage() {
                 { id: 'dpr', label: '📁 Downloadable DPR & CAD', icon: '📁' },
                 { id: 'feed-calc', label: '🌾 Low-Cost Feed Calculator', icon: '🌾' },
                 { id: 'masterclasses', label: '🎓 Clinical Masterclasses', icon: '🎓' },
-                { id: 'doctor', label: '🩺 Book Vet Doctor Call', icon: '🩺' },
+                { id: 'doctor', label: '🩺 Book Expert Doctor Call', icon: '🩺' },
                 { id: 'seed-stock', label: '📜 Verified Breeder Hub', icon: '📜' }
               ].map((tab) => (
                 <button
@@ -503,7 +510,7 @@ export default function PremiumContentPage() {
             {activeTab === 'masterclasses' && (
               <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm animate-fadeIn space-y-6">
                 <h3 className="text-2xl font-black text-slate-900">
-                  🎓 12-Month Veterinary Masterclass Video Series
+                  🎓 12-Month Expert Masterclass Video Series
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {[
@@ -538,7 +545,7 @@ export default function PremiumContentPage() {
               </div>
             )}
 
-            {/* TAB 4: BOOK VET DOCTOR CALL */}
+            {/* TAB 4: BOOK EXPERT DOCTOR CALL */}
             {activeTab === 'doctor' && (
               <div className="bg-white p-6 sm:p-10 rounded-3xl border border-slate-200 shadow-sm animate-fadeIn max-w-4xl mx-auto space-y-6">
                 <div className="text-center max-w-xl mx-auto">
@@ -549,7 +556,7 @@ export default function PremiumContentPage() {
                     Schedule 1-on-1 Doctor Video Call
                   </h3>
                   <p className="text-slate-600 text-sm mt-1">
-                    Direct video consultation with a senior goat veterinary surgeon to review herd symptoms, prescription dosages, or farm shed layout.
+                    Direct video consultation with a senior goat expert to review herd symptoms, prescription dosages, or farm shed layout.
                   </p>
                 </div>
 

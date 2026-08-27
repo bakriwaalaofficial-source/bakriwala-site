@@ -16,27 +16,46 @@
   }
 }
 
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   top: 0 !important;
+  position: static !important;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto !important;
 }
 
 /* ======================================================= */
-/* CLEAN GOOGLE TRANSLATE OVERRIDES                        */
+/* CLEAN GOOGLE TRANSLATE OVERRIDES & SCROLL SAFETY        */
 /* ======================================================= */
 .goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
 .VIpgJd-ZVi9od-ORHb-OEVmcd,
 #goog-gt-tt,
 .goog-te-balloon-frame,
 .goog-te-gadget-icon,
-.goog-te-menu-value img {
+.goog-te-menu-value img,
+.skiptranslate iframe {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  z-index: -9999 !important;
 }
 
-body {
-  top: 0 !important;
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
 }
 
 #google_translate_element .goog-te-gadget {

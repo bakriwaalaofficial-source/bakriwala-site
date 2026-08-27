@@ -70,7 +70,7 @@ export default function Dashboard() {
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           <h2 className="text-xl font-bold text-slate-800 mb-4">Upcoming Schedule</h2>
           <div className="p-4 bg-blue-50 border border-blue-100 rounded-lg">
-            <p className="font-semibold text-blue-900">Vet Consultation</p>
+            <p className="font-semibold text-blue-900">Expert Consultation</p>
             <p className="text-blue-700 text-sm mt-1">Dr. Sharma • Tomorrow, 10:00 AM</p>
           </div>
         </div>

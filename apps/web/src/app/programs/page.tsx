@@ -34,7 +34,7 @@ export default function ProgramsPage() {
       id: 'disease-vaccination',
       category: 'health',
       title: 'Goat Disease Identification, Treatment & Vaccination',
-      badge: 'Veterinary Certified',
+      badge: 'Expert Certified',
       duration: '3 Weeks Intensive',
       level: 'All Farmers & Farm Supervisors',
       rating: '5.0 ★ (980+ Farmers)',
@@ -44,7 +44,7 @@ export default function ProgramsPage() {
         'Complete 12-month national vaccination calendar',
         'Emergency first-aid and injectable drug administration',
         'Deworming rotation strategy to prevent chemical resistance',
-        'Ethno-veterinary (Desi/Ayurvedic) home remedies'
+        'Traditional & Expert (Desi/Ayurvedic) home remedies'
       ]
     },
     {
@@ -132,7 +132,7 @@ export default function ProgramsPage() {
         <PageHeader
           badge="Scientific Curriculum"
           title="Training Programs & Masterclasses"
-          subtitle="Designed by veterinary surgeons, livestock economists, and experienced farm owners to maximize farm profit and zero out preventable losses."
+          subtitle="Designed by livestock experts, livestock economists, and experienced farm owners to maximize farm profit and zero out preventable losses."
           breadcrumb="Programs"
         />
 
@@ -242,9 +242,9 @@ export default function ProgramsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm text-center">
                 <div className="text-4xl mb-4">🩺</div>
-                <h4 className="text-lg font-bold mb-2">Qualified Vets</h4>
+                <h4 className="text-lg font-bold mb-2">Qualified Experts</h4>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Lectures and guidance by experienced veterinary surgeons with real livestock field experience.
+                  Lectures and guidance by experienced livestock experts with real livestock field experience.
                 </p>
               </div>
 

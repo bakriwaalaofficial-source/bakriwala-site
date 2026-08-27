@@ -34,7 +34,7 @@ export default function Home() {
             </h1>
 
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl font-normal mx-auto lg:mx-0">
-              Empowering farmers and livestock entrepreneurs with scientific, research-backed training, AI veterinary diagnostics, genetic breed selection, and profitable stall-fed farm models.
+              Empowering farmers and livestock entrepreneurs with scientific, research-backed training, AI expert diagnostics, genetic breed selection, and profitable stall-fed farm models.
             </p>
 
             <div className="pt-3 flex flex-wrap justify-center lg:justify-start gap-4">
@@ -94,21 +94,24 @@ export default function Home() {
         <section className="py-12 bg-white border-y border-slate-200 shadow-xs">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div className="p-4">
+              <div className="p-4 flex flex-col justify-center items-center">
                 <h3 className="text-3xl sm:text-4xl font-black text-green-700">10,000+</h3>
-                <p className="text-xs sm:text-sm text-slate-700 font-bold mt-1">Farmers Trained</p>
+                <p className="text-xs sm:text-sm text-slate-800 font-bold mt-1">Farmers Trained</p>
               </div>
-              <div className="p-4">
-                <h3 className="text-3xl sm:text-4xl font-black text-green-700">120+</h3>
-                <p className="text-xs sm:text-sm text-slate-700 font-bold mt-1">Veterinary Experts</p>
+              <div className="p-4 flex flex-col justify-center items-center">
+                <h3 className="text-3xl sm:text-4xl font-black text-green-700">25+</h3>
+                <p className="text-xs sm:text-sm text-slate-800 font-bold mt-1">Livestock Experts</p>
+                <p className="text-[11px] text-slate-500 font-medium mt-0.5 leading-snug max-w-[210px]">
+                  (Professors from renowned universities, Ph.D. Scholars)
+                </p>
               </div>
-              <div className="p-4">
-                <h3 className="text-3xl sm:text-4xl font-black text-green-700">50+</h3>
-                <p className="text-xs sm:text-sm text-slate-700 font-bold mt-1">Video Masterclasses</p>
+              <div className="p-4 flex flex-col justify-center items-center">
+                <h3 className="text-3xl sm:text-4xl font-black text-green-700">100+</h3>
+                <p className="text-xs sm:text-sm text-slate-800 font-bold mt-1">Videos (Best Practices)</p>
               </div>
-              <div className="p-4">
+              <div className="p-4 flex flex-col justify-center items-center">
                 <h3 className="text-3xl sm:text-4xl font-black text-green-700">24/7</h3>
-                <p className="text-xs sm:text-sm text-slate-700 font-bold mt-1">AI Vet Diagnostics</p>
+                <p className="text-xs sm:text-sm text-slate-800 font-bold mt-1">AI-Based Goat Disease Diagnosis</p>
               </div>
             </div>
           </div>
@@ -135,10 +138,10 @@ export default function Home() {
                 Pioneering Modern Goat Farming Education Across India
               </h2>
               <p className="text-slate-700 leading-relaxed text-sm sm:text-base font-normal">
-                BakriWalaOfficial is India's premier digital platform dedicated to goat farming, disease prevention, nutrition formulation, and commercial livestock entrepreneurship.
+                BakriWalaOfficial is a leading digital platform dedicated to transforming goat farming through practical, affordable and science-based knowledge. We cover the complete goat farming journey—from breeding, feeding, housing and disease prevention to farm economics, entrepreneurship and end-to-end goat marketing.
               </p>
               <p className="text-slate-700 leading-relaxed text-sm sm:text-base font-normal">
-                From low-cost wooden elevated slatted sheds to precise vaccine calendars and NABARD bankable project reports, we equip farmers with complete practical knowledge.
+                From low-cost elevated slatted sheds, economical feed formulations and scientific vaccination calendars to NABARD/government/bankable project reports, market linkages, pricing and buyer-seller connections, we equip farmers with end-to-end knowledge and practical tools to build sustainable, scalable, and profitable goat enterprises.
               </p>
               <div className="pt-2">
                 <Link
@@ -319,7 +322,7 @@ export default function Home() {
             <div className="animate-marquee flex items-center gap-6">
               {[
                 { src: '/1.jpeg', title: 'Stall-Fed System', cat: 'Farm Unit' },
-                { src: '/4.jpeg', title: 'Veterinary Class', cat: 'Practical' },
+                { src: '/4.jpeg', title: 'Expert Class', cat: 'Practical' },
                 { src: '/5 (1).jpeg', title: 'Barbari Seed Stock', cat: 'Breed' },
                 { src: '/5 (2).jpeg', title: 'Farm Visit & Audit', cat: 'Tour' },
                 { src: '/5 (3).jpeg', title: 'TMR Feeding Aisles', cat: 'Facility' },
@@ -329,7 +332,7 @@ export default function Home() {
                 { src: '/5 (10).jpeg', title: 'Graduation Batch', cat: 'Event' },
                 { src: '/5 (12).jpeg', title: 'Jamunapari King', cat: 'Breed' },
                 { src: '/1.jpeg', title: 'Stall-Fed System', cat: 'Farm Unit' },
-                { src: '/4.jpeg', title: 'Veterinary Class', cat: 'Practical' },
+                { src: '/4.jpeg', title: 'Expert Class', cat: 'Practical' },
                 { src: '/5 (1).jpeg', title: 'Barbari Seed Stock', cat: 'Breed' },
                 { src: '/5 (2).jpeg', title: 'Farm Visit & Audit', cat: 'Tour' },
                 { src: '/5 (3).jpeg', title: 'TMR Feeding Aisles', cat: 'Facility' },

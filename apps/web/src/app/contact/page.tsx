@@ -30,8 +30,8 @@ export default function ContactPage() {
       a: 'Our central classroom and practical demonstration sessions are organized in Lucknow and partner breeding facilities in Uttar Pradesh and Rajasthan. Online live masterclasses are accessible from anywhere in India.'
     },
     {
-      q: 'How can I get immediate veterinary advice for a sick goat?',
-      a: 'You can use our 24/7 floating AI chatbot for instant symptom triage, or message our veterinary medical team on WhatsApp at +91 63920 04098 with pictures/videos of the symptoms for priority doctor guidance.'
+      q: 'How can I get immediate expert advice for a sick goat?',
+      a: 'You can use our 24/7 floating AI chatbot for instant symptom triage, or message our expert medical team on WhatsApp at +91 63920 04098 with pictures/videos of the symptoms for priority doctor guidance.'
     },
     {
       q: 'Do you provide certificate support for NABARD / Bank loans?',
@@ -53,7 +53,7 @@ export default function ContactPage() {
         <PageHeader
           badge="Support & Connect"
           title="Contact BakriWalaOfficial"
-          subtitle="Reach out to our veterinary experts, training coordinators, or head office in Lucknow for guidance, farm visits, and partnership inquiries."
+          subtitle="Reach out to our farming experts, training coordinators, or head office in Lucknow for guidance, farm visits, and partnership inquiries."
           breadcrumb="Contact"
         />
 
@@ -69,7 +69,7 @@ export default function ContactPage() {
                 </span>
                 <h2 className="text-3xl font-black text-slate-900 mt-2 mb-2">We Are Here to Help</h2>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  Have a question about modern shed construction, feed ration formulation, or booking a veterinary consultation? Contact us anytime.
+                  Have a question about modern shed construction, feed ration formulation, or booking an expert consultation? Contact us anytime.
                 </p>
               </div>
 
@@ -213,7 +213,7 @@ export default function ContactPage() {
                           className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                         >
                           <option value="training">Training Program Enrollment</option>
-                          <option value="vet">Veterinary & Health Advisory</option>
+                          <option value="expert">Expert & Health Advisory</option>
                           <option value="breeds">Breed Stock Purchase Inquiry</option>
                           <option value="dpr">NABARD / Bank Loan DPR Report</option>
                           <option value="other">Other Inquiry</option>

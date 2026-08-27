@@ -44,11 +44,11 @@ export default function GalleryPage() {
     {
       id: 2,
       src: '/4.jpeg',
-      title: 'Practical Veterinary Clinical Training',
+      title: 'Practical Expert Clinical Training',
       category: 'training',
       categoryLabel: 'Training Workshop',
       description: 'Hands-on practical training for body weight calculation, subcutaneous vaccination, and deworming administration.',
-      tags: ['Veterinary', 'Practical', 'Diagnostics'],
+      tags: ['Expert Training', 'Practical', 'Diagnostics'],
       initialLikes: 218
     },
     {
@@ -184,11 +184,11 @@ export default function GalleryPage() {
     {
       id: 16,
       src: '/5 (14).jpeg',
-      title: 'BakriWala Veterinary Consulting Team',
+      title: 'BakriWala Expert Consulting Team',
       category: 'events',
       categoryLabel: 'Events & Expos',
-      description: 'Our dedicated team of veterinary surgeons, nutritionists, and agronomists supporting farmers daily.',
-      tags: ['Vet Team', 'Consultants', 'Leadership'],
+      description: 'Our dedicated team of livestock experts, nutritionists, and agronomists supporting farmers daily.',
+      tags: ['Expert Team', 'Consultants', 'Leadership'],
       initialLikes: 275
     }
   ];
@@ -261,7 +261,7 @@ export default function GalleryPage() {
         <PageHeader
           badge="Live Visual Showcase"
           title="Interactive Farm & Event Gallery"
-          subtitle="Explore dynamic tours of our modern elevated goat sheds, veterinary training sessions, championship breeds, and farmer graduation events."
+          subtitle="Explore dynamic tours of our modern elevated goat sheds, expert training sessions, championship breeds, and farmer graduation events."
           breadcrumb="Gallery"
         />
 

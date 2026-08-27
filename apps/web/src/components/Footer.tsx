@@ -22,7 +22,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-              India's premier digital ecosystem for goat farmers and livestock entrepreneurs. Empowering farmers with scientific training, veterinary advisory, high-yield breed selection, and profitable business models.
+              India's premier digital ecosystem for goat farmers and livestock entrepreneurs. Empowering farmers with scientific training, expert advisory, high-yield breed selection, and profitable business models.
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-2.5">
               <a 
@@ -120,7 +120,7 @@ export default function Footer() {
                 <Link href="/programs#subsidies" className="hover:text-green-400 transition">Govt Loans & NABARD Schemes</Link>
               </li>
               <li>
-                <Link href="/premium" className="hover:text-green-400 transition">1-on-1 Vet Mentorship</Link>
+                <Link href="/premium" className="hover:text-green-400 transition">1-on-1 Expert Mentorship</Link>
               </li>
             </ul>
           </div>

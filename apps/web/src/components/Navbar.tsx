@@ -63,6 +63,7 @@ export default function Navbar() {
     { name: 'Gallery', href: '/gallery' },
     { name: 'Breeds', href: '/breeds' },
     { name: 'Premium', href: '/premium' },
+    { name: 'Payment', href: '/payment' },
     { name: 'Contact', href: '/contact' },
   ];
 

@@ -53,10 +53,10 @@ export default function AboutPage() {
                 Empowering India's Goat Farmers with Science & Technology
               </h2>
               <p className="text-slate-700 leading-relaxed text-base font-normal">
-                BakriWalaOfficial was born from a fundamental observation: while goat farming is often hailed as the “poor man’s cow” and a key rural livelihood, farmers suffered immense financial losses due to high kid mortality, unscientific housing, improper feeding, and lack of immediate veterinary assistance.
+                BakriWalaOfficial was born from a fundamental observation: while goat farming is often hailed as the “poor man’s cow” and a key rural livelihood, farmers suffered immense financial losses due to high kid mortality, unscientific housing, improper feeding, and lack of immediate expert assistance.
               </p>
               <p className="text-slate-700 leading-relaxed text-base font-normal">
-                We set out to change this by combining grassroots on-ground farm workshops, comprehensive multimedia masterclasses, and state-of-the-art AI veterinary diagnostics to make commercial goat farming transparent, low-cost, and extraordinarily profitable.
+                We set out to change this by combining grassroots on-ground farm workshops, comprehensive multimedia masterclasses, and state-of-the-art AI expert diagnostics to make commercial goat farming transparent, low-cost, and extraordinarily profitable.
               </p>
 
               <div className="pt-2 grid grid-cols-2 gap-4">
@@ -90,7 +90,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-3">Our Mission</h3>
                 <p className="text-slate-700 leading-relaxed font-normal text-base">
-                  To democratize access to world-class livestock veterinary expertise, low-cost nutrient formulations, and breed genetics for every goat farmer in India, turning traditional goat rearing into a scalable, wealth-generating enterprise.
+                  To democratize access to world-class livestock expertise, low-cost nutrient formulations, and breed genetics for every goat farmer in India, turning traditional goat rearing into a scalable, wealth-generating enterprise.
                 </p>
                 <ul className="mt-6 space-y-2 text-sm text-slate-700 font-medium">
                   <li className="flex items-center gap-2">✓ Zero preventable disease mortality</li>
@@ -110,7 +110,7 @@ export default function AboutPage() {
                 </p>
                 <ul className="mt-6 space-y-2 text-sm text-slate-700 font-medium">
                   <li className="flex items-center gap-2">✓ Digitized health cards for every goat</li>
-                  <li className="flex items-center gap-2">✓ Instant multilingual AI veterinary triage</li>
+                  <li className="flex items-center gap-2">✓ Instant multilingual AI expert triage</li>
                   <li className="flex items-center gap-2">✓ Standardized, high-yield breeding centers</li>
                 </ul>
               </div>
@@ -168,7 +168,7 @@ export default function AboutPage() {
           <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
             <h2 className="text-3xl sm:text-4xl font-black mb-4">Ready to Upgrade Your Goat Farm?</h2>
             <p className="text-slate-300 text-base max-w-2xl mx-auto mb-8">
-              Explore our structured training programs or consult with our veterinary advisors today.
+              Explore our structured training programs or consult with our expert advisors today.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
