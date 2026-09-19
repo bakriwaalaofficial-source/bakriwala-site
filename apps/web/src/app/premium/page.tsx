@@ -1,16 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SocialBar from '@/components/SocialBar';
 import Chatbot from '@/components/Chatbot';
 import PageHeader from '@/components/PageHeader';
-import RazorpayModal, { PlanDetails } from '@/components/RazorpayModal';
+import { PlanDetails } from '@/components/RazorpayModal';
 
 export default function PremiumPage() {
-  const [selectedPlan, setSelectedPlan] = useState<PlanDetails | null>(null);
 
   const tiers: PlanDetails[] = [
     {
@@ -342,7 +341,7 @@ export default function PremiumPage() {
                   </div>
 
                   {/* Actions */}
-                  <div className="space-y-2.5 mt-auto pt-4">
+                  <div className="mt-auto pt-4">
                     <Link
                       href="/payment"
                       className={`w-full py-3.5 rounded-xl font-black text-xs sm:text-sm transition shadow-md flex items-center justify-center gap-1.5 ${
@@ -355,18 +354,6 @@ export default function PremiumPage() {
                     >
                       <span>{ctaLabels[tier.name] || 'Proceed to Payment'}</span>
                     </Link>
-
-                    <button
-                      type="button"
-                      onClick={() => setSelectedPlan(tier)}
-                      className={`w-full py-2 rounded-lg font-bold text-[11px] transition border flex items-center justify-center gap-1 ${
-                        isPopular || isEnterprise
-                          ? 'border-slate-700 text-slate-300 hover:bg-slate-800'
-                          : 'border-slate-300 text-slate-700 hover:bg-slate-100'
-                      }`}
-                    >
-                      <span>⚡ Quick Razorpay Modal</span>
-                    </button>
                   </div>
                 </div>
               );
@@ -594,13 +581,7 @@ export default function PremiumPage() {
 
       <Footer />
 
-      {/* Razorpay Checkout Modal */}
-      {selectedPlan && (
-        <RazorpayModal
-          plan={selectedPlan}
-          onClose={() => setSelectedPlan(null)}
-        />
-      )}
+
     </div>
   );
 }
