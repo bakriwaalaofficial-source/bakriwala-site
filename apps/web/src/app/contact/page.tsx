@@ -9,19 +9,61 @@ import PageHeader from '@/components/PageHeader';
 
 export default function ContactPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    email: '',
     state: '',
     queryType: 'training',
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const queryTypeLabels: Record<string, string> = {
+    training: 'Training Program Enrollment',
+    expert: 'Expert & Health Advisory',
+    breeds: 'Breed Stock Purchase Inquiry',
+    dpr: 'NABARD / Bank Loan DPR Report',
+    other: 'Other Inquiry',
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setFormSubmitted(true);
+      } else {
+        setSubmitError(data.error || 'Failed to submit query. Please try again or reach out on WhatsApp.');
+      }
+    } catch (err: any) {
+      console.error('Submission error:', err);
+      setSubmitError('Network error: Unable to submit query. Please check your connection or contact us via WhatsApp.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const getWhatsAppUrl = () => {
+    const text = encodeURIComponent(
+      `Hello BakriWala Team, I have submitted a query regarding "${queryTypeLabels[formData.queryType] || formData.queryType}".\nName: ${formData.name}\nPhone: ${formData.phone}\nMessage: ${formData.message}`
+    );
+    return `https://wa.me/+916392004098?text=${text}`;
   };
 
   const faqs = [
@@ -127,10 +169,13 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-slate-900 text-base">Official Email</h3>
-                  <p className="text-slate-700 text-sm mt-1 font-semibold">
+                  <a
+                    href="mailto:bakriwaalaofficial@gmail.com"
+                    className="text-green-700 hover:underline text-sm mt-1 font-semibold block"
+                  >
                     bakriwaalaofficial@gmail.com
-                  </p>
-                  <p className="text-slate-500 text-xs mt-1">For institutional & enterprise inquiries</p>
+                  </a>
+                  <p className="text-slate-500 text-xs mt-1">All website queries are routed directly here</p>
                 </div>
               </div>
             </div>
@@ -138,32 +183,69 @@ export default function ContactPage() {
             {/* Right Interactive Form (7 cols) */}
             <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-lg relative">
               {formSubmitted ? (
-                <div className="text-center py-16 space-y-4 animate-fadeIn">
-                  <div className="w-16 h-16 bg-green-100 text-green-700 text-3xl rounded-full flex items-center justify-center mx-auto">
+                <div className="text-center py-12 space-y-5 animate-fadeIn">
+                  <div className="w-20 h-20 bg-green-100 text-green-700 text-4xl rounded-full flex items-center justify-center mx-auto shadow-inner">
                     ✓
                   </div>
-                  <h3 className="text-2xl font-black text-slate-900">Query Received Successfully!</h3>
-                  <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
-                    Thank you, <span className="font-bold text-slate-900">{formData.name || 'Farmer'}</span>. Our expert team has received your message and will reach out to <span className="font-bold text-green-700">{formData.phone}</span> within 24 hours.
+                  <div>
+                    <span className="inline-block px-3 py-1 bg-green-50 text-green-700 text-xs font-bold rounded-full border border-green-200 mb-2">
+                      Delivered to Official Inbox
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-black text-slate-900">Query Received Successfully!</h3>
+                  </div>
+                  <p className="text-slate-600 text-sm max-w-lg mx-auto leading-relaxed">
+                    Thank you, <span className="font-bold text-slate-900">{formData.name || 'Farmer'}</span>. Your message regarding{' '}
+                    <span className="font-semibold text-green-800">
+                      {queryTypeLabels[formData.queryType] || formData.queryType}
+                    </span>{' '}
+                    has been delivered to{' '}
+                    <span className="font-bold text-slate-900">bakriwaalaofficial@gmail.com</span>. Our agricultural livestock officer will reach out to{' '}
+                    <span className="font-bold text-green-700">{formData.phone}</span> within 24 hours.
                   </p>
-                  <button
-                    onClick={() => {
-                      setFormSubmitted(false);
-                      setFormData({ name: '', phone: '', state: '', queryType: 'training', message: '' });
-                    }}
-                    className="mt-4 px-6 py-2.5 bg-slate-900 text-white font-bold rounded-xl text-sm hover:bg-green-700 transition"
-                  >
-                    Submit Another Query
-                  </button>
+
+                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a
+                      href={getWhatsAppUrl()}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full sm:w-auto px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl text-sm transition shadow-md flex items-center justify-center gap-2"
+                    >
+                      <span>💬 Chat Instantly on WhatsApp</span>
+                    </a>
+                    <button
+                      onClick={() => {
+                        setFormSubmitted(false);
+                        setFormData({ name: '', phone: '', email: '', state: '', queryType: 'training', message: '' });
+                      }}
+                      className="w-full sm:w-auto px-6 py-3 bg-slate-900 text-white font-bold rounded-xl text-sm hover:bg-slate-800 transition"
+                    >
+                      Submit Another Query
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <>
                   <div className="mb-6">
-                    <h3 className="text-2xl font-black text-slate-900">Send us a Message</h3>
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <h3 className="text-2xl font-black text-slate-900">Send us a Message</h3>
+                      <span className="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md font-medium">
+                        ✉️ bakriwaalaofficial@gmail.com
+                      </span>
+                    </div>
                     <p className="text-slate-500 text-xs sm:text-sm mt-1">
-                      Fill out the details below and an agricultural livestock officer will assist you.
+                      Fill out the details below. Your query is sent directly to our official inbox and team.
                     </p>
                   </div>
+
+                  {submitError && (
+                    <div className="mb-5 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-xs sm:text-sm flex items-start gap-2">
+                      <span className="text-base flex-shrink-0">⚠️</span>
+                      <div className="flex-1">
+                        <p className="font-bold">Submission notice:</p>
+                        <p>{submitError}</p>
+                      </div>
+                    </div>
+                  )}
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -194,6 +276,17 @@ export default function ContactPage() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1">Email Address (Optional)</label>
+                        <input
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          placeholder="farmer@gmail.com"
+                          className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+                        />
+                      </div>
+
+                      <div>
                         <label className="block text-xs font-bold text-slate-700 mb-1">State / District *</label>
                         <input
                           type="text"
@@ -204,21 +297,21 @@ export default function ContactPage() {
                           className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                         />
                       </div>
+                    </div>
 
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">Query Subject</label>
-                        <select
-                          value={formData.queryType}
-                          onChange={(e) => setFormData({ ...formData, queryType: e.target.value })}
-                          className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
-                        >
-                          <option value="training">Training Program Enrollment</option>
-                          <option value="expert">Expert & Health Advisory</option>
-                          <option value="breeds">Breed Stock Purchase Inquiry</option>
-                          <option value="dpr">NABARD / Bank Loan DPR Report</option>
-                          <option value="other">Other Inquiry</option>
-                        </select>
-                      </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Query Subject *</label>
+                      <select
+                        value={formData.queryType}
+                        onChange={(e) => setFormData({ ...formData, queryType: e.target.value })}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600 font-medium text-slate-700"
+                      >
+                        <option value="training">Training Program Enrollment</option>
+                        <option value="expert">Expert & Health Advisory</option>
+                        <option value="breeds">Breed Stock Purchase Inquiry</option>
+                        <option value="dpr">NABARD / Bank Loan DPR Report</option>
+                        <option value="other">Other Inquiry</option>
+                      </select>
                     </div>
 
                     <div>
@@ -235,11 +328,30 @@ export default function ContactPage() {
 
                     <button
                       type="submit"
-                      className="w-full py-3.5 bg-green-700 hover:bg-green-800 text-white font-black text-sm rounded-xl transition shadow-md flex items-center justify-center gap-2"
+                      disabled={isSubmitting}
+                      className={`w-full py-3.5 bg-green-700 hover:bg-green-800 text-white font-black text-sm rounded-xl transition shadow-md flex items-center justify-center gap-2 ${
+                        isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                      }`}
                     >
-                      <span>Submit Query to BakriWala</span>
-                      <span>➔</span>
+                      {isSubmitting ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          <span>Sending Query to BakriWala...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Submit Query to BakriWala</span>
+                          <span>➔</span>
+                        </>
+                      )}
                     </button>
+
+                    <p className="text-center text-[11px] text-slate-400 mt-2">
+                      🔒 Your query is delivered directly to <span className="font-semibold text-slate-600">bakriwaalaofficial@gmail.com</span> and our WhatsApp advisory desk.
+                    </p>
                   </form>
                 </>
               )}

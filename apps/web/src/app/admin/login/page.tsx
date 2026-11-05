@@ -14,19 +14,35 @@ export default function AdminLogin() {
     setError('');
 
     try {
-      const res = await fetch('http://localhost:8000/api/admin/login', {
+      // Try local Next.js API route first
+      let res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
+      let data;
+      if (res.ok) {
+        data = await res.json();
+      } else {
+        // Fallback to Express backend if port 8000 is running
+        try {
+          const fallbackRes = await fetch('http://localhost:8000/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          });
+          data = await fallbackRes.json();
+        } catch {
+          data = await res.json();
+        }
+      }
 
-      if (data.success) {
+      if (data?.success) {
         localStorage.setItem('adminToken', data.token);
         router.push('/admin/dashboard');
       } else {
-        setError(data.error || 'Invalid credentials');
+        setError(data?.error || 'Invalid credentials');
       }
     } catch (err) {
       setError('Could not connect to authentication server');
@@ -57,7 +73,7 @@ export default function AdminLogin() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500 text-white"
-              placeholder="admin@goatcare.ai"
+              placeholder="bakriwaalaofficial@gmail.com"
             />
           </div>
 
@@ -75,7 +91,7 @@ export default function AdminLogin() {
 
           <button
             type="submit"
-            className="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 rounded-lg shadow-lg transition"
+            className="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-lg shadow-lg transition"
           >
             Authenticate Admin
           </button>

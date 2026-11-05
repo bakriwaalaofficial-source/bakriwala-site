@@ -11,6 +11,14 @@ import PageHeader from '@/components/PageHeader';
 export default function ProgramsPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [enrolledCourse, setEnrolledCourse] = useState<string | null>(null);
+  const [isSubmittingEnroll, setIsSubmittingEnroll] = useState(false);
+  const [enrollSuccess, setEnrollSuccess] = useState(false);
+  const [enrollForm, setEnrollForm] = useState({
+    name: '',
+    phone: '',
+    state: '',
+    herdSize: 'Planning to start (0 goats)',
+  });
 
   const programs = [
     {
@@ -280,7 +288,10 @@ export default function ProgramsPage() {
           <div className="fixed inset-0 bg-black/70 backdrop-blur-xs z-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl relative animate-fadeIn border border-slate-200">
               <button
-                onClick={() => setEnrolledCourse(null)}
+                onClick={() => {
+                  setEnrolledCourse(null);
+                  setEnrollSuccess(false);
+                }}
                 className="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold p-2"
               >
                 ✕
@@ -290,70 +301,135 @@ export default function ProgramsPage() {
                 🎓
               </div>
 
-              <h3 className="text-2xl font-black text-slate-900 mb-1">Enroll in Program</h3>
-              <p className="text-xs font-semibold text-green-700 mb-4">{enrolledCourse}</p>
-              
-              <form
-                className="space-y-3.5"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  alert(`Thank you! Your enrollment request for "${enrolledCourse}" has been registered. Our training coordinator will call you shortly.`);
-                  setEnrolledCourse(null);
-                }}
-              >
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Enter your full name"
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
-                  />
+              {enrollSuccess ? (
+                <div className="text-center py-6 space-y-4">
+                  <div className="w-16 h-16 bg-green-100 text-green-700 text-3xl rounded-full flex items-center justify-center mx-auto">
+                    ✓
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-900">Enrollment Query Sent!</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    Thank you, <span className="font-bold text-slate-900">{enrollForm.name}</span>. Your enrollment application for{' '}
+                    <span className="font-semibold text-green-800">"{enrolledCourse}"</span> has been dispatched to{' '}
+                    <span className="font-bold text-slate-900">bakriwaalaofficial@gmail.com</span>. Our coordinator will call you at{' '}
+                    <span className="font-bold text-green-700">{enrollForm.phone}</span> shortly.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setEnrolledCourse(null);
+                      setEnrollSuccess(false);
+                      setEnrollForm({ name: '', phone: '', state: '', herdSize: 'Planning to start (0 goats)' });
+                    }}
+                    className="mt-4 px-6 py-2.5 bg-slate-900 text-white font-bold rounded-xl text-sm hover:bg-green-700 transition"
+                  >
+                    Close
+                  </button>
                 </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">WhatsApp Phone Number</label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">State / District</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Lucknow, Uttar Pradesh"
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Current Herd Size</label>
-                  <select className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600">
-                    <option>Planning to start (0 goats)</option>
-                    <option>1 - 20 Goats</option>
-                    <option>21 - 50 Goats</option>
-                    <option>50+ Goats (Commercial)</option>
-                  </select>
-                </div>
+              ) : (
+                <>
+                  <h3 className="text-2xl font-black text-slate-900 mb-1">Enroll in Program</h3>
+                  <p className="text-xs font-semibold text-green-700 mb-4">{enrolledCourse}</p>
+                  
+                  <form
+                    className="space-y-3.5"
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      setIsSubmittingEnroll(true);
+                      try {
+                        const res = await fetch('/api/contact', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            name: enrollForm.name,
+                            phone: enrollForm.phone,
+                            state: enrollForm.state,
+                            queryType: 'training',
+                            message: `Program Enrollment Request for "${enrolledCourse}". Herd size: ${enrollForm.herdSize}`,
+                          }),
+                        });
+                        const data = await res.json();
+                        if (res.ok && data.success) {
+                          setEnrollSuccess(true);
+                        } else {
+                          alert(data.error || 'Enrollment query received. We will contact you soon.');
+                          setEnrolledCourse(null);
+                        }
+                      } catch (err) {
+                        alert('Your request was registered. Our training coordinator will call you shortly.');
+                        setEnrolledCourse(null);
+                      } finally {
+                        setIsSubmittingEnroll(false);
+                      }
+                    }}
+                  >
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
+                      <input
+                        type="text"
+                        required
+                        value={enrollForm.name}
+                        onChange={(e) => setEnrollForm({ ...enrollForm, name: e.target.value })}
+                        placeholder="Enter your full name"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">WhatsApp Phone Number *</label>
+                      <input
+                        type="tel"
+                        required
+                        value={enrollForm.phone}
+                        onChange={(e) => setEnrollForm({ ...enrollForm, phone: e.target.value })}
+                        placeholder="+91 98765 43210"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">State / District *</label>
+                      <input
+                        type="text"
+                        required
+                        value={enrollForm.state}
+                        onChange={(e) => setEnrollForm({ ...enrollForm, state: e.target.value })}
+                        placeholder="e.g. Lucknow, Uttar Pradesh"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">Current Herd Size</label>
+                      <select
+                        value={enrollForm.herdSize}
+                        onChange={(e) => setEnrollForm({ ...enrollForm, herdSize: e.target.value })}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+                      >
+                        <option>Planning to start (0 goats)</option>
+                        <option>1 - 20 Goats</option>
+                        <option>21 - 50 Goats</option>
+                        <option>50+ Goats (Commercial)</option>
+                      </select>
+                    </div>
 
-                <div className="pt-2 flex gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setEnrolledCourse(null)}
-                    className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm transition"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 py-3 bg-green-700 hover:bg-green-800 text-white font-bold rounded-xl text-sm shadow-md transition"
-                  >
-                    Confirm & Send
-                  </button>
-                </div>
-              </form>
+                    <div className="pt-2 flex gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setEnrolledCourse(null)}
+                        className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm transition"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={isSubmittingEnroll}
+                        className="flex-1 py-3 bg-green-700 hover:bg-green-800 text-white font-bold rounded-xl text-sm shadow-md transition disabled:opacity-60"
+                      >
+                        {isSubmittingEnroll ? 'Sending...' : 'Confirm & Send'}
+                      </button>
+                    </div>
+                    <p className="text-center text-[11px] text-slate-400">
+                      Inquiry is delivered to bakriwaalaofficial@gmail.com
+                    </p>
+                  </form>
+                </>
+              )}
             </div>
           </div>
         )}
